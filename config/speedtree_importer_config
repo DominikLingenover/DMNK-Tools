@@ -1,0 +1,9 @@
+[General]
+renderer_dropdown=Arnold
+size=@Size(423 206)
+opc_as_stencil=false
+pos=@Point(267 747)
+cc_on_diff=false
+diff_is_linear=false
+use_env=false
+env=

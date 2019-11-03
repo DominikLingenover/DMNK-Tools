@@ -1,0 +1,16 @@
+[General]
+pref_exr=false
+size=@Size(428 307)
+pos=@Point(500 392)
+pref_metal=false
+cc_on_diff=false
+auto_triplanar=false
+enable_udim=false
+opc_as_stencil=true
+height_is_displ=false
+man_tex_sel=false
+apply_to_sel_obj=false
+use_env=false
+diff_is_linear=false
+env=
+renderer_dropdown=Arnold

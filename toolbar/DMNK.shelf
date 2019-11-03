@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+  <!-- This file contains definitions of shelves, toolbars, and tools.
+ It should not be hand-edited when it is being used by the application.
+ Note, that two definitions of the same element are not allowed in
+ a single file. -->
+
+  <toolshelf name="dmnk_shelf" label="DMNK">
+    <memberTool name="dmnk_asset_checker"/>
+    <memberTool name="dmnk_material_importer"/>
+    <memberTool name="dmnk_speedtree_importer"/>
+  </toolshelf>
+
+  <tool name="dmnk_asset_checker" label="Asset Checker" icon="PLASMA_App">
+    <helpText><![CDATA[= Asset Checker v1.0 =
+
+#context: sop
+#internal: copy
+
+#name: value
+
+"""A tool to quickly organize your scenes."""
+
+== Overview ==
+The Asset Checker tool allows you to quickly relink missing assets and copy assets to subfolders in a specified directory.
+At the top of the UI you will find a Status message with how many assets your scene contains and how many of them are missing.
+All the settings that you enter will be saved in a config file so you don't have to re-enter them.
+If needed you can also delete assets from the list by selecting them and pressing ((Delete)).
+
+== Tips ==
+If you want to delete assets from the list you can select them and press ((Delete)). 
+In case you deleted something by accident just click the [Icon:BUTTONS/reload] button to re-parse the scene.
+
+If you want some specific assets in specific folders you can select them and change the subfolder name in the *Config*. 
+If you select multiple asset types (i.e. textures, geometry or simulation files) you just have to ender the same folder name for each type.
+
+
+@parameters
+
+::[Icon:BUTTONS/gear_mini]: 
+    * ((LMB)) Open settings.
+    
+    * ((Shift + LMB)) Open config.
+    
+::[Icon:BUTTONS/reload]:
+    Re-parses the scene.
+    
+::Relink:
+    * ((LMB)) Searches for all files in the specified *Search* directory and relinks all found assets.
+    
+    * ((Shift + LMB)) Same functionality as ((LMB)) but for selected assets.
+    
+    * ((Ctrl + LMB)) Populates the *New Path* column with a preview of the resulting path. (Does not relink assets)
+    
+    * ((Ctrl + Shift + LMB)) Same functionality as ((Ctrl + LMB)) but for selected assets.
+    
+::Copy:
+    * ((LMB)) Copies all assets to the specified *Target* directory.
+    
+    * ((Shift + LMB)) Same functionality as ((LMB)) but for selected assets.
+    
+== Settings ==
+::Search:
+    Specifies the path that is recursively searched for files.
+    
+    Accepts literal paths or variables. (`$HIP`, `$JOB` or a custom variable)
+    
+::Target:
+    Specifies the path that files are copied to.
+    
+    Accepts literal paths or variables. (`$HIP`, `$JOB` or a custom variable)
+
+::Only relink missing Assets:
+    If this option is enabled only textures that are missing can be relinked.
+    
+    To relink textures regardless if they are missing or not, deactivate this option.
+    
+== Config ==
+::Tex Folder:
+    Specifies the texture folder name that is created inside the Target path.
+    
+::Geo Folder:
+    Specifies the geometry folder name that is created inside the Target path.
+    
+::Sim Folder:
+    Specifies the simulation folder name that is created inside the Target path.]]></helpText>
+    <script scriptType="python"><![CDATA[from asset_checker import asset_checker
+reload(asset_checker)
+asset_checker.show()]]></script>
+  </tool>
+
+  <tool name="dmnk_material_importer" label="Material Importer" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[from material_importer import material_importer_core
+reload(material_importer_core)
+material_importer_core.show()]]></script>
+  </tool>
+
+  <tool name="dmnk_speedtree_importer" label="SpeedTree Importer" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[from speedtree_importer import speedtree_importer_core
+reload(speedtree_importer_core)
+speedtree_importer_core.show()]]></script>
+  </tool>
+</shelfDocument>

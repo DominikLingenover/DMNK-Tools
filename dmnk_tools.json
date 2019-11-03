@@ -1,0 +1,6 @@
+{
+	"env":[
+		{"dmnk" : "G:/Python_Tools/DMNK_Tools"},
+		{"HOUDINI_PATH" : "$dmnk"},
+	]
+}

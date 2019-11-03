@@ -1,0 +1,10 @@
+[General]
+size=@Size(1274 731)
+tex_Path=tex
+geo_Path=geo
+pos=@Point(37 195)
+search_Path=
+var_Name=
+sim_Path=sim
+only_Missing_CB=true
+include_out=false
