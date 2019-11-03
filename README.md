@@ -8,7 +8,7 @@
 
 ## Overview
 
-DMNK Shelf is a nice set of Python Scripts and HDAs to speed up your workflow.
+DMNK Shelf is a set of Python Scripts and HDAs to speed up your workflow.
 All tools are designed to be easy to use and take away the manual labour involved with daily tasks an artist may face.
 Render related scripts work with all major engines except Mantra. (Arnold, Octane, Redshift, Renderman, VRay)
 
