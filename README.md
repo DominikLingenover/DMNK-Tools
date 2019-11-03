@@ -24,6 +24,7 @@ SpeedTree Importer | One-Click solution to import SpeedTree assets.
 Intel + Nvidia Denoiser | An HDA to process renders with Intel or Nvidia denoiser in PDG.
 ACES Batch Converter | An HDA to batch convert images and textures to ACES in PDG.
 > All tools have been tested in Houdini 17.5 on Windows 10. Only minimal testing happened on Linux. 
+> Note: The Denoiser HDA requires the pre-compiled versions from [Declan Russel](https://github.com/DeclanRussell)
 
 ## Installation Guide
 
