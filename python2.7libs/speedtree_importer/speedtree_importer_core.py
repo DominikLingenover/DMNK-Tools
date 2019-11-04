@@ -180,6 +180,8 @@ class SpeedTreeImporter(QtWidgets.QWidget):
             }
 
         elif engine == 'Octane':
+            self.ui.diff_is_linear.setDisabled(False)
+            
             input_slots = {
                 'diffuse': 2,
                 'ao': None,
@@ -210,6 +212,8 @@ class SpeedTreeImporter(QtWidgets.QWidget):
             }
 
         elif engine == 'Redshift':
+            self.ui.diff_is_linear.setDisabled(False)
+
             input_slots = {
                 'diffuse': 0,
                 'ao': 1,
@@ -270,6 +274,8 @@ class SpeedTreeImporter(QtWidgets.QWidget):
             }
 
         elif engine == 'VRay':
+            self.ui.diff_is_linear.setDisabled(False)
+            
             input_slots = {
                 'diffuse': 0,
                 'ao': None,
@@ -299,8 +305,11 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                 'gamma': ['BitmapBuffer_color_space', '0']
             }
         
-        if engine not in  ['Octane', 'Redshift', 'VRay']:
+        if engine not in  ['Redshift', 'VRay']:
             self.ui.opc_as_stencil.setDisabled(True)
+
+        if engine not in ['Octane', 'Redshift', 'VRay']:
+            self.ui.diff_is_linear.setDisabled(True)
 
     def createGeo(self):
         global geo_node

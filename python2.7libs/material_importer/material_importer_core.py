@@ -177,6 +177,8 @@ class TextureImporter(QWidget):
         
         elif engine == 'Octane':
             self.ui.use_vertex_displ.setDisabled(False)
+            self.ui.diff_is_linear.setDisabled(False)
+
             input_slots = {
                 'diffuse': 2,
                 'spec': 4,
@@ -192,6 +194,7 @@ class TextureImporter(QWidget):
 
         elif engine == 'Redshift':
             self.ui.opc_as_stencil.setDisabled(False)
+            self.ui.diff_is_linear.setDisabled(False)
 
             input_slots = {
                 'diffuse': 0,
@@ -220,6 +223,8 @@ class TextureImporter(QWidget):
             }
 
         elif engine == 'VRay':
+            self.ui.diff_is_linear.setDisabled(False)
+            
             input_slots = {
                 'diffuse': 0,
                 'spec': 5,
@@ -235,6 +240,9 @@ class TextureImporter(QWidget):
 
         if engine != 'Octane':
             self.ui.use_vertex_displ.setDisabled(True)
+
+        if engine not in ['Octane', 'Redshift', 'VRay']:
+            self.ui.diff_is_linear.setDisabled(True)
 
     def updateConfig(self):
         pref_exr = self.ui.pref_exr.isChecked()

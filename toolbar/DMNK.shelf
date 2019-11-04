@@ -80,7 +80,7 @@ If you select multiple asset types (i.e. textures, geometry or simulation files)
 ::Sim Folder:
     Specifies the simulation folder name that is created inside the Target path.]]></helpText>
     <script scriptType="python"><![CDATA[from asset_checker import asset_checker
-reload(asset_checker)
+#reload(asset_checker)
 asset_checker.show()]]></script>
   </tool>
 
@@ -170,13 +170,44 @@ This only matters if the name is not describing the actual texture type.
     WARNING:
         Octane only.]]></helpText>
     <script scriptType="python"><![CDATA[from material_importer import material_importer_core
-reload(material_importer_core)
+#reload(material_importer_core)
 material_importer_core.show()]]></script>
   </tool>
 
   <tool name="dmnk_speedtree_importer" label="SpeedTree Importer" icon="PLASMA_App">
+    <helpText><![CDATA[= Material Importer v2.0 =
+
+"""Quickly import SpeedTree assets."""
+
+== Overview ==
+The SpeedTree Importer allows you to quickly import SpeedTree assets as a one-click solution and create OGL tags for the viewport.
+
+@parameters
+
+::Renderer: 
+    Choose the Renderer you want to import the textures with.
+    
+::Jump to Node:
+    ((LMB)) Jumps to the Geo.
+    ((Shift + LMB)) Jumps to the matnet.
+    
+== Settings ==
+::Opacity as Stencil:
+    Opacity will be treated as a cutout mask.
+    
+    WARNING:
+        Redshift and VRay only.
+        
+::Diffuse is Linear:
+    Enable this option if diffuse textures are linear.
+    
+    WARNING:
+        Octane, Redshift and VRay only.
+        
+::Use Environment Variable:
+    Enable this option to get relative texture paths.]]></helpText>
     <script scriptType="python"><![CDATA[from speedtree_importer import speedtree_importer_core
-reload(speedtree_importer_core)
+#reload(speedtree_importer_core)
 speedtree_importer_core.show()]]></script>
   </tool>
 </shelfDocument>
