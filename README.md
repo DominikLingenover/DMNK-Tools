@@ -30,8 +30,8 @@ ACES Batch Converter | An HDA to batch convert images and textures to ACES in PD
 
 1. Download the latest [release](https://github.com/DominikLingenover/DMNK-Tools/releases)
 1. Unpack the file to your desired location 
-1. Set up your [houdini.env](https://www.sidefx.com/docs/houdini/basics/config_env#setting-environment-variables)
-    ```
-    dmnk = "path/to/folder/DMNK_Tools"
-    HOUDINI_PATH = $HOUDINI_PATH;$dmnk
-    ```
+1. Set up your environment with the new [packages](https://www.sidefx.com/docs/houdini/ref/plugins.html) system or the old [houdini.env](https://www.sidefx.com/docs/houdini/ref/env.html) system.
+Example files are provided in the main directory. 
+[Packages file](https://github.com/DominikLingenover/DMNK-Tools/blob/master/dmnk_tools.json) or 
+[houdini.env](https://github.com/DominikLingenover/DMNK-Tools/blob/master/houdini.env)
+1. Add the 'DMNK' shelf to your toolbar.
