@@ -14,11 +14,6 @@
   <tool name="dmnk_asset_checker" label="Asset Checker" icon="PLASMA_App">
     <helpText><![CDATA[= Asset Checker v1.0 =
 
-#context: sop
-#internal: copy
-
-#name: value
-
 """A tool to quickly organize your scenes."""
 
 == Overview ==
@@ -90,6 +85,90 @@ asset_checker.show()]]></script>
   </tool>
 
   <tool name="dmnk_material_importer" label="Material Importer" icon="PLASMA_App">
+    <helpText><![CDATA[= Material Importer v2.0 =
+
+"""Quickly import textures and build shading networks."""
+
+== Overview ==
+The Material Importer tool allows you to quickly import textures and automatically build the shading network + OGL tags for the viewport.
+The tool works with a variety of naming conventions, although there are some things to take into consideration.
+
+== Naming Conventions for Textures == 
+Multiple resolutions should be placed in subfolders, otherwise the script will prompt you to do manual selections of which textures you wanna use.
+
+The texture name should not contain texture type names multiple times. 
+For example: `metalpaint_diffuse.exr, metalpaint_spec.exr, etc.` are fine but `metal_paint_diffuse.exr, metal_paint_spec.exr, etc.` aren't.
+The difference here is that the word "metal" is separated by an underscore, so the script will assume that all textures are of type metal and will fail to load your textures properly.
+
+Here is a list of all names that should be avoided being used as a separated word:
+`"diffuse", "diff", "albedo", "color", "col", "alb", "dif", "basecolor", 
+"ao", "ambientocclusion", "ambient_occlusion", "cavity", 
+"specular", "spec", "s", "refl", "reflectivity", 
+"roughness", "rough", "r", "gloss", "g", "glossiness",
+"metal", "metalness", "m", "metallic",
+"transparency", "t", "opacity", "o",
+"emission", "emissive",
+"normal", "nrm", "nrml", "n", "norm_ogl", "normalbump",
+"bump", "bmp", "height", "h",
+"displacement", "displace", "disp"`
+
+Once again, it's totally fine using those words if they are NOT enclosed by `/ - and _`. For example `"_diffuse_", "-diffuse-" or ".diffuse."`.
+This only matters if the name is not describing the actual texture type.
+
+@parameters
+
+::Renderer: 
+    Choose the Renderer you want to import the textures with.
+    
+::Jump to Material:
+    Jumps into the last created material builder.
+    
+== Settings ==
+::Prefer EXR:
+    Chooses EXR over any other type if there are multiple texture types.
+    
+::Prefer Metal Textures:
+    Chooses metal textures over others if there is more than one texture type that defines reflectivity.
+
+::Enable UDIM:
+    Enable this option when importing UDIM textures.
+    Disable on everything else.
+    
+::Height is Displacement:
+    Height textures will be considered as displacement instead of bump.
+    
+::Opacity as Stencil:
+    Opacity will be treated as a cutout mask.
+    
+    WARNING:
+        Redshift and VRay only.
+        
+::Diffuse is Linear:
+    Enable this option if diffuse textures are linear.
+    
+    WARNING:
+        Octane, Redshift and VRay only.
+        
+::Color Correction on Diffuse:
+    Automatically creates a CC node for the diffuse texture.
+    
+::Auto Tri-Planar:
+    Automatically creates a tri-planar shading network.
+    
+::Manual Texture Selection:
+    Manually select the textures you want to import. This is mainly a last resort option if the automatic import fails.
+    
+::Apply to Selected Objects:
+    Automatically applies the material to all selected objects after it is created.
+    
+::Use Environment Variable:
+    Enable this option to get relative texture paths.
+    
+::Use Vertex Displacement:
+    Use Vertex Displacement instead of Voxel Displacement.
+    
+    WARNING:
+        Octane only.]]></helpText>
     <script scriptType="python"><![CDATA[from material_importer import material_importer_core
 reload(material_importer_core)
 material_importer_core.show()]]></script>

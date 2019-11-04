@@ -28,7 +28,7 @@ QGroupBox::indicator:checked {
 
 # Relevant paths 
 scriptpath = os.path.dirname(__file__)
-dmnk_path = hou.getenv("DMNK")
+dmnk_path = hou.getenv("dmnk")
 configpath = dmnk_path + "/config/material_importer_config"
 
 # Initiliaze variables
@@ -1467,21 +1467,28 @@ class TextureImporter(QWidget):
             count.pop('gloss', None)
 
         # Create final texture list
+        pop_these = []
         for texType in texList:
             if count[texType] > 1:
                 tempTexList = []
                 for tex in texList[texType]:
                     tempTexList.append(tex)
                 try:
-                    tex = self.showDialog(tempTexList, False)[0]
+                    tex = self.showDialog(tempTexList, texType, False)[0]
                 except:
-                    break
+                    tex = None
 
             elif count[texType] == 1:
                 tex = texList[texType][0]
 
-            texList[texType] = tex
-        
+            if tex != None:
+                texList[texType] = tex
+            else:
+                pop_these.append(texType)
+
+        for textype in pop_these:
+            texList.pop(textype, None)
+
         self.createShaders(texList, sel_Node)
 
     def toggleEnvVar(self):
@@ -1490,7 +1497,7 @@ class TextureImporter(QWidget):
         else:
             self.ui.env.setDisabled(True)
 
-    def showDialog(self, tempTexList, man_sel):
+    def showDialog(self, tempTexList, texType, man_sel):
         loader = QUiLoader()
         ui = loader.load(scriptpath + "/texlist.ui")
 
@@ -1499,6 +1506,10 @@ class TextureImporter(QWidget):
 
         texListDialog = hou.qt.Dialog()
         texListDialog.setLayout(dialogLayout)
+
+        window_title = "Multiple " + texType + " textures found. Please select one."
+
+        texListDialog.setWindowTitle(window_title)
 
         ui.buttonBox.accepted.connect(texListDialog.accept)
         ui.buttonBox.rejected.connect(texListDialog.reject)
@@ -1513,14 +1524,17 @@ class TextureImporter(QWidget):
 
         texListDialog.exec_()
 
-        items = texListWidget.selectedItems()
+        try:
+            items = texListWidget.selectedItems()
 
-        newIniList = []
-        for x in range(len(items)):
-            newIniList.append(str(texListWidget.selectedItems()[x].text()))
+            newIniList = []
+            for x in range(len(items)):
+                newIniList.append(str(texListWidget.selectedItems()[x].text()))
 
-        
-        return newIniList
+            return newIniList
+
+        except:
+            print("Selection failed.")
 
     def jump_to_mat(self):
         try:
