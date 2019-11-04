@@ -2,7 +2,6 @@
 
 ## DMNK Shelf | Workflow oriented Python Scripts / HDAs
 
-![GitHub All Releases](https://img.shields.io/github/downloads/DominikLingenover/DMNK-Tools/total?style=for-the-badge)
 ![Twitter Follow](https://img.shields.io/twitter/follow/j0zen_?label=Twitter&style=for-the-badge)
 <br></br>
 
