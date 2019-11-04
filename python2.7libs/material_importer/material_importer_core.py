@@ -80,8 +80,6 @@ class TextureImporter(QWidget):
 
         self.ui.settings.setStyleSheet(CLGRP_STYLE)
 
-        self.updateEngine()
-
         # Config
         self.ui.pref_exr.setChecked(str(self.settings.value("pref_exr", False)).lower() == 'true')
         self.ui.pref_metal.setChecked(str(self.settings.value("pref_metal", False)).lower() == 'true')
@@ -148,6 +146,8 @@ class TextureImporter(QWidget):
         # Main function
         self.ui.import_mat.clicked.connect(self.loadImages)
 
+        self.updateEngine()
+
     def hideEvent(self, event):
         """
         When window is closed store position and size in config.
@@ -155,10 +155,6 @@ class TextureImporter(QWidget):
 
         self.settings.setValue("size", self.size())
         self.settings.setValue("pos", self.pos())
-    
-    def helpEvent(self, event, view, option, index):
-        print "Test"
-        print event
 
     def updateEngine(self):
         global engine
@@ -916,7 +912,7 @@ class TextureImporter(QWidget):
                             mat_node.setInput(input_slots[imageType], cc_node)
 
                         else:
-                            mat_node.setInput(input_slots[imageType], triplanar_node)
+                            mat_node.setInput(input_slots[imageType], tex_node)
             
             elif engine =='Octane':
                 mat_builder_node = hou.node("/mat").createNode("octane_vopnet")
@@ -1425,13 +1421,9 @@ class TextureImporter(QWidget):
                         if bFound in h_names and self.ui.height_is_displ.isChecked() == True:
                             texList.setdefault('disp', [])
                             texList['disp'].append(dirpath + tex)
-                            # texList.setdefault('disp', ([], [names[4]['disp'][0], names[4]['disp'][1]]))
-                            # texList[names[4]['disp'][2]][0].append(dirpath + tex)
                         else:
                             texList.setdefault(imageType, [])
                             texList[imageType].append(dirpath + tex)
-                            # texList.setdefault(imageType[bFound][2], ([], [imageType[bFound][0], imageType[bFound][1]]))
-                            # texList[imageType[bFound][2]][0].append(dirpath + tex)
                     else:
                         pass
             else:
@@ -1447,7 +1439,6 @@ class TextureImporter(QWidget):
                         texList[texType] = []
                         texList[texType].extend(check_for_exr)
         
-        # 
         count = {}
 
         for texType in texList:
