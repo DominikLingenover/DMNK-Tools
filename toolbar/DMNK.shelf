@@ -12,7 +12,7 @@
   </toolshelf>
 
   <tool name="dmnk_asset_checker" label="Asset Checker" icon="PLASMA_App">
-    <helpText><![CDATA[= Asset Checker v1.0 =
+    <helpText><![CDATA[= Asset Checker =
 
 """A tool to quickly organize your scenes."""
 
@@ -85,7 +85,7 @@ asset_checker.show()]]></script>
   </tool>
 
   <tool name="dmnk_material_importer" label="Material Importer" icon="PLASMA_App">
-    <helpText><![CDATA[= Material Importer v2.0 =
+    <helpText><![CDATA[= Material Importer =
 
 """Quickly import textures and build shading networks."""
 
@@ -175,7 +175,7 @@ material_importer_core.show()]]></script>
   </tool>
 
   <tool name="dmnk_speedtree_importer" label="SpeedTree Importer" icon="PLASMA_App">
-    <helpText><![CDATA[= Material Importer v2.0 =
+    <helpText><![CDATA[= SpeedTree Importer =
 
 """Quickly import SpeedTree assets."""
 
