@@ -10,9 +10,10 @@
     <memberTool name="dmnk_material_importer"/>
     <memberTool name="dmnk_speedtree_importer"/>
     <memberTool name="fspy_importer"/>
+    <memberTool name="dmnk_samples_editor"/>
   </toolshelf>
 
-  <tool name="dmnk_asset_checker" label="Asset Checker" icon="opdef:/Cop2/aces_convert?asset_checker.svg">
+  <tool name="dmnk_asset_checker" label="Asset Checker" icon="opdef:/Cop2/aces_convert::1.0?asset_checker.svg">
     <helpText><![CDATA[= Asset Checker =
 
 """A tool to quickly organize your scenes."""
@@ -85,7 +86,7 @@ If you select multiple asset types (i.e. textures, geometry or simulation files)
 asset_checker.show()]]></script>
   </tool>
 
-  <tool name="dmnk_material_importer" label="Material" icon="opdef:/Cop2/aces_convert?mat_importer.svg">
+  <tool name="dmnk_material_importer" label="Material" icon="opdef:/Cop2/aces_convert::1.0?mat_importer.svg">
     <helpText><![CDATA[= Material Importer =
 
 """Quickly import textures and build shading networks."""
@@ -175,7 +176,7 @@ This only matters if the name is not describing the actual texture type.
 material_importer_core.show()]]></script>
   </tool>
 
-  <tool name="dmnk_speedtree_importer" label="SpeedTree" icon="opdef:/Cop2/aces_convert?speedtree_icon.png">
+  <tool name="dmnk_speedtree_importer" label="SpeedTree" icon="opdef:/Cop2/aces_convert::1.0?speedtree_icon.png">
     <helpText><![CDATA[= SpeedTree Importer =
 
 """Quickly import SpeedTree assets."""
