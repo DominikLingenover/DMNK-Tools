@@ -20,8 +20,10 @@ Tool | Functionality
 Asset Checker | Manages missing files in your project & more!
 Material Importer | Quickly imports textures and builds whole shading networks.
 SpeedTree Importer | One-Click solution to import SpeedTree assets.
+fSpy Importer | Imports JSON files from [fSpy](https://github.com/stuffmatic/fSpy)
 Intel + Nvidia Denoiser | An HDA to process renders with Intel or Nvidia denoiser in PDG.
 ACES Batch Converter | An HDA to batch convert images and textures to ACES in PDG.
+ACES Convert | A simple HDA to save a few clicks when converting an image to ACES in COPs.
 > All tools have been tested in Houdini 17.5 on Windows 10. Only minimal testing happened on Linux. 
 
 > Note: The Denoiser HDA requires the pre-compiled versions from [Declan Russel](https://github.com/DeclanRussell)
