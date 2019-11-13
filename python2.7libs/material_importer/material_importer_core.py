@@ -1385,7 +1385,7 @@ class TextureImporter(QWidget):
             for tex in os.listdir(dirpath):
                 if tex.endswith(extensions):
                     tempTexList.append(tex)
-            initial_texList = self.showDialog(tempTexList, True)
+            initial_texList = self.showDialog(tempTexList,"", True)
 
         # Add '/' to file name to avoid empty match from RegEx and transform to lowercase
         for i in range(len(initial_texList)):
@@ -1515,7 +1515,10 @@ class TextureImporter(QWidget):
         texListDialog = hou.qt.Dialog()
         texListDialog.setLayout(dialogLayout)
 
-        window_title = "Multiple " + texType + " textures found. Please select one."
+        if len(texType) == 0:
+            window_title = "Please select your textures manually."
+        else:
+            window_title = "Multiple " + texType + " textures found. Please select one."
 
         texListDialog.setWindowTitle(window_title)
 
