@@ -572,7 +572,7 @@ class TextureImporter(QWidget):
 
             if len(diffuse_path) > 0:
                 material_builder.parm("ogl_tex1").set("`chs('"+diffuse_path+"/tex0')`", hou.exprLanguage.Hscript)
-                material_builder.parm("ogl_texuvset1").set("`chs('"+diffuse_path+"/tspace_id`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_texuvset1").set("`chs('"+diffuse_path+"/tspace_id')`", hou.exprLanguage.Hscript)
 
             material_builder.parm("ogl_specr").setExpression("ch('"+material_path+"/refl_colorr')", hou.exprLanguage.Hscript)
             material_builder.parm("ogl_specg").setExpression("ch('"+material_path+"/refl_colorg')", hou.exprLanguage.Hscript)
@@ -581,43 +581,40 @@ class TextureImporter(QWidget):
             material_builder.parm("ogl_rough").setExpression("ch('"+material_path+"/refl_roughness')", hou.exprLanguage.Hscript)
             material_builder.parm("ogl_ior").setExpression("ch('"+material_path+"/refl_ior')", hou.exprLanguage.Hscript)
 
-            if len(normal_path) > 0:
-                material_builder.parm("ogl_normalmap").set("`chs('"+normal_path+"/tex0`')", hou.exprLanguage.Hscript)
-
             if len(metal_path) > 0:
-                material_builder.parm("ogl_metallicmap").set("`chs('"+metal_path+"/tex0`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_metallicmap").set("`chs('"+metal_path+"/tex0')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_metallic").setExpression("ch('"+material_path+"/refl_metalness')", hou.exprLanguage.Hscript)
             elif len(spec_path) > 0:
                 material_builder.parm("ogl_use_metallicmap").set(0)
                 material_builder.parm("ogl_use_specmap").set(1)
-                material_builder.parm("ogl_specmap").set("`chs('"+spec_path+"/tex0`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_specmap").set("`chs('"+spec_path+"/tex0')`", hou.exprLanguage.Hscript)
 
             if len(rough_path) > 0:
-                material_builder.parm("ogl_roughmap").set("`chs('"+rough_path+"/tex0`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_roughmap").set("`chs('"+rough_path+"/tex0')`", hou.exprLanguage.Hscript)
             elif len(gloss_path) > 0:
                 material_builder.parm("ogl_invertroughmap").set(1)
-                material_builder.parm("ogl_roughmap").set("`chs('"+gloss_path+"/tex0`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_roughmap").set("`chs('"+gloss_path+"/tex0')`", hou.exprLanguage.Hscript)
 
             if len(bump_path) > 0:
                 material_builder.parm("ogl_use_bumpmap").set(1)
                 material_builder.parm("ogl_use_normalmap").set(0)
-                material_builder.parm("ogl_bumpmap").set("`chs('"+bump_path+"/tex0`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_bumpmap").set("`chs('"+bump_path+"/tex0')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_bumpscale").setExpression("ch(BumpMap1/scale)")
             elif len(normal_path) > 0:
-                material_builder.parm("ogl_normalmap").set("`chs('"+normal_path+"/tex0`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_normalmap").set("`chs('"+normal_path+"/tex0')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_normalmap_scale").setExpression("ch(BumpMap1/scale)")
                 material_builder.parm("ogl_normalflipy").setExpression("ch(BumpMap1/flipY)")
 
             if len(opc_path) > 0:
                 material_builder.parm("ogl_use_alpha_transparency").set(1)
                 material_builder.parm("ogl_use_opacitymap").set(1)
-                material_builder.parm("ogl_opacitymap").set("`chs('"+opc_path+"/tex0`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_opacitymap").set("`chs('"+opc_path+"/tex0')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_transparency").set(0)
 
             if len(emission_path) > 0:
                 material_builder.parm("ogl_use_emit").set(1)
                 material_builder.parm("ogl_use_emissionmap").set(1)
-                material_builder.parm("ogl_emissionmap").set("`chs('"+emission_path+"/tex0`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_emissionmap").set("`chs('"+emission_path+"/tex0')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_emitr").set(1)
                 material_builder.parm("ogl_emitg").set(1)
                 material_builder.parm("ogl_emitb").set(1)
@@ -627,7 +624,7 @@ class TextureImporter(QWidget):
 
             if len(displ_path) > 0:
                 material_builder.parm("ogl_use_displacemap").set(1)
-                material_builder.parm("ogl_displacemap").set("`chs('"+displ_path+"/tex0`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_displacemap").set("`chs('"+displ_path+"/tex0')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_displacescale").setExpression("ch('Displacement1/scale')", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_displaceoffset").setExpression("ch('Displacement1/oldrange_min')", hou.exprLanguage.Hscript)
 
@@ -705,7 +702,7 @@ class TextureImporter(QWidget):
             # material_builder.parm("ogl_diff_rough").setExpression("ch('"+material_path+"/diffuse_roughness')", hou.exprLanguage.Hscript)
 
             if len(diffuse_path) > 0:
-                material_builder.parm("ogl_tex1").set("`chs('"+diffuse_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_tex1").set("`chs('"+diffuse_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
                 # material_builder.parm("ogl_texuvset1").setExpression("chs('"+diffuse_path+"/tspace_id')", hou.exprLanguage.Hscript)
 
             # material_builder.parm("ogl_specr").setExpression("ch('"+material_path+"/refl_colorr')", hou.exprLanguage.Hscript)
@@ -716,42 +713,42 @@ class TextureImporter(QWidget):
             material_builder.parm("ogl_ior").setExpression("ch('"+material_path+"/index4')", hou.exprLanguage.Hscript)
 
             if len(normal_path) > 0:
-                material_builder.parm("ogl_normalmap").set("`chs('"+normal_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_normalmap").set("`chs('"+normal_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
 
             if len(metal_path) > 0:
-                material_builder.parm("ogl_metallicmap").set("`chs('"+metal_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_metallicmap").set("`chs('"+metal_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_metallic").setExpression("ch('"+material_path+"/metallic')", hou.exprLanguage.Hscript)
             elif len(spec_path) > 0:
                 material_builder.parm("ogl_use_metallicmap").set(0)
                 material_builder.parm("ogl_use_specmap").set(1)
-                material_builder.parm("ogl_specmap").set("`chs('"+spec_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_specmap").set("`chs('"+spec_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
 
             if len(rough_path) > 0:
-                material_builder.parm("ogl_roughmap").set("`chs('"+rough_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_roughmap").set("`chs('"+rough_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
             elif len(gloss_path) > 0:
                 material_builder.parm("ogl_invertroughmap").set(1)
-                material_builder.parm("ogl_roughmap").set("`chs('"+gloss_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_roughmap").set("`chs('"+gloss_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
 
             if len(bump_path) > 0:
                 material_builder.parm("ogl_use_bumpmap").set(1)
                 material_builder.parm("ogl_use_normalmap").set(0)
-                material_builder.parm("ogl_bumpmap").set("`chs('"+bump_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_bumpmap").set("`chs('"+bump_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_bumpscale").setExpression("chs('"+bump_path+"/power')")
             elif len(normal_path) > 0:
-                material_builder.parm("ogl_normalmap").set("`chs('"+normal_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_normalmap").set("`chs('"+normal_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_normalmap_scale").setExpression("chs('"+normal_path+"/power')")
                 # material_builder.parm("ogl_normalflipy").setExpression("ch(BumpMap1/flipY)")
 
             if len(opc_path) > 0:
                 material_builder.parm("ogl_use_alpha_transparency").set(1)
                 material_builder.parm("ogl_use_opacitymap").set(1)
-                material_builder.parm("ogl_opacitymap").set("`chs('"+opc_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_opacitymap").set("`chs('"+opc_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_transparency").set(0)
 
             if len(emission_path) > 0:
                 material_builder.parm("ogl_use_emit").set(1)
                 material_builder.parm("ogl_use_emissionmap").set(1)
-                material_builder.parm("ogl_emissionmap").set("`chs('"+emission_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_emissionmap").set("`chs('"+emission_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
                 material_builder.parm("ogl_emitr").set(1)
                 material_builder.parm("ogl_emitg").set(1)
                 material_builder.parm("ogl_emitb").set(1)
@@ -761,7 +758,7 @@ class TextureImporter(QWidget):
 
             if len(displ_path) > 0:
                 material_builder.parm("ogl_use_displacemap").set(1)
-                material_builder.parm("ogl_displacemap").set("`chs('"+displ_path+"/A_FILENAME`')", hou.exprLanguage.Hscript)
+                material_builder.parm("ogl_displacemap").set("`chs('"+displ_path+"/A_FILENAME')`", hou.exprLanguage.Hscript)
                 if self.ui.use_vertex_displ.isChecked() == True:
                     material_builder.parm("ogl_displacescale").setExpression("ch(NT_VERTEX_DISPLACEMENT1/amount)", hou.exprLanguage.Hscript)
                     material_builder.parm("ogl_displaceoffset").setExpression("ch(NT_VERTEX_DISPLACEMENT1/black_level)", hou.exprLanguage.Hscript)
