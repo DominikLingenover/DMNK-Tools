@@ -11,8 +11,6 @@ DMNK Shelf is a set of Python Scripts and HDAs to speed up your workflow.
 All tools are designed to be easy to use and take away the manual labour involved with daily tasks an artist may face.
 Render related scripts work with all major engines except Mantra. (Arnold, Octane, Redshift, Renderman, VRay)
 
-If you'd like to financially support me you can pay what you want on [Gumroad.](https://gumroad.com/l/GedTf)
-
 ## Current Toolset
 
 Tool | Functionality
@@ -20,7 +18,8 @@ Tool | Functionality
 Asset Checker | Manages missing files in your project & more!
 Material Importer | Quickly imports textures and builds whole shading networks.
 SpeedTree Importer | One-Click solution to import SpeedTree assets.
-fSpy Importer | Imports JSON files from [fSpy](https://github.com/stuffmatic/fSpy)
+fSpy Importer | Imports JSON files from [fSpy](https://github.com/stuffmatic/fSpy) **(EXPERIMENTAL)**
+RS Samples Editor | A GUI to set up individual samples quicker **(EXPERIMENTAL)**
 Intel + Nvidia Denoiser | An HDA to process renders with Intel or Nvidia denoiser in PDG.
 ACES Batch Converter | An HDA to batch convert images and textures to ACES in PDG.
 ACES Convert | A simple HDA to save a few clicks when converting an image to ACES in COPs.
