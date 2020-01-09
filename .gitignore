@@ -1,3 +1,5 @@
 ws_dmnk_tools.code-workspace
 *.qrc
 *.pyc
+.vscode/*
+config/*
