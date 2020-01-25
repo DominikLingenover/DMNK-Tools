@@ -11,6 +11,7 @@
     <memberTool name="dmnk_speedtree_importer"/>
     <memberTool name="fspy_importer"/>
     <memberTool name="dmnk_samples_editor"/>
+    <memberTool name="dmnk_rs_tex_manager"/>
   </toolshelf>
 
   <tool name="dmnk_asset_checker" label="Asset Checker" icon="opdef:/Cop2/aces_convert::1.0?asset_checker.svg">
@@ -266,5 +267,17 @@ cam = hou.node("obj").createNode("cam")
 a = hou.Matrix4(cam_matrix)
 cam.setWorldTransform(a)
 cam.setParms( { "tx": cam_x_trans, "ty": cam_y_trans, "tz": cam_z_trans, "resx": x_res, "resy": y_res, "focal": FL, "aperture": SS, "winx": sw_x, "winy": sw_y } )]]></script>
+  </tool>
+
+  <tool name="dmnk_samples_editor" label="Samples" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[from samples_editor import samples_editor_core
+reload(samples_editor_core)
+samples_editor_core.show()]]></script>
+  </tool>
+
+  <tool name="dmnk_rs_tex_manager" label="RS Tx" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[from rs_tex_manager import rs_tex_manager_core
+reload(rs_tex_manager_core)
+rs_tex_manager_core.show()]]></script>
   </tool>
 </shelfDocument>
