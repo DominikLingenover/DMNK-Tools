@@ -213,6 +213,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
 
         elif engine == 'Redshift':
             self.ui.diff_is_linear.setDisabled(False)
+            self.ui.opc_as_stencil.setDisabled(False)
 
             input_slots = {
                 'diffuse': 0,
@@ -409,6 +410,8 @@ class SpeedTreeImporter(QtWidgets.QWidget):
             except:
                 pass
 
+        tex_list = ["/" + x for x in tex_list]
+
         return tex_list, dirpath
 
     def create_Materials(self, geo_node, matnet, mat_assign_node, prim_groups, tex_list, dirpath):
@@ -438,11 +441,11 @@ class SpeedTreeImporter(QtWidgets.QWidget):
 
             # Remove unnecessary names from prim group
             getMatSG = re.findall(r"(?i)_*(?:matsg|mat)_*", x.name())
+            prim_group = x.name()
 
             if len(getMatSG) > 0:
-                prim_group = x.name().replace(getMatSG[0], "")
-            else:
-                prim_group = x.name()
+                for i, word in enumerate(getMatSG):
+                    prim_group = prim_group.replace(getMatSG[i], "")
 
             # Find leaf and leaf variations
             is_leaf = re.search(r"(?i)leaf", prim_group)
@@ -499,7 +502,6 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                 base_prim_group = prim_group[:-3] #  Base prim group to get missing texture types for leaf variation
 
                 for tex in tex_list:
-                    tex = "/" + tex
                     find_leaf_variation_tex = re.search(r"(?i)(?:" + prim_group + r")" + regex_filter, tex)
 
                     if find_leaf_variation_tex != None:
@@ -723,7 +725,6 @@ class SpeedTreeImporter(QtWidgets.QWidget):
 
                         
                 for tex in tex_list:
-                    tex = "/" + tex
                     find_base_leaf_tex = re.search(r"(?i)(?:" + base_prim_group + r")" + regex_filter, tex)
 
                     if find_base_leaf_tex != None:
@@ -894,8 +895,6 @@ class SpeedTreeImporter(QtWidgets.QWidget):
 
             else:
                 for tex in tex_list:
-                    tex = "/" + tex
-
                     if engine == 'VRay':
                         if is_leaf != None:
                             mat_node = front_mat_node
