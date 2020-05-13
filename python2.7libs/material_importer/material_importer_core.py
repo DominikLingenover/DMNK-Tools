@@ -1097,7 +1097,7 @@ class TextureImporter(QWidget):
                             if imageType != "displ":
                                 mat_node.setInput(input_slots[imageType], triplanar_node)
 
-                            elif imageType == "normal" or imageType == "bump":
+                            if imageType == "normal" or imageType == "bump":
                                 normal_node = mat_builder_node.createNode("redshift::BumpMap")
                                 normal_node.setInput(0, triplanar_node)
                                 mat_node.setInput(input_slots[imageType], normal_node)
