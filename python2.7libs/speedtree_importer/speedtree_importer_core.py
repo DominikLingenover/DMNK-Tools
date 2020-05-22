@@ -246,15 +246,15 @@ class SpeedTreeImporter(QtWidgets.QWidget):
 
         elif engine == 'Renderman':
             input_slots = {
-                'diffuse': 1,
-                'ao': 2,
+                'diffuse': 2,
+                'ao': 1,
                 'transl_weight': 7,
                 'transl_color': 8,
                 'spec': 10,
                 'rough': 14,
                 'gloss': 14,
-                'opc': 94,
-                'normal': 92,
+                'opc': 96,
+                'normal': 94,
                 'bump': 92,
             }
             node_names = {
@@ -547,8 +547,10 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                             else:
                                 mat_node.setInput(input_slots['diffuse'], tex_node)
 
-                            if prim_group.lower() + "_subsurfacecolor.png" not in tex_list_lower:
+                            if "/" + prim_group.lower() + "_subsurfacecolor.png" not in tex_list_lower:
                                 transl_color_exists = True
+                                print("/" + prim_group.lower() + "_subsurfacecolor.png")
+                                print(tex_list_lower)
 
                                 cc_node = mat_builder_node.createNode(node_names['cc'])
                                 cc_node.setInput(0, tex_node)
@@ -589,6 +591,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 if diffuse_exists == True:
                                     diffuse_node.setInput(0, tex_node)
 
+                            elif engine == 'Renderman':
+                                mat_node.setInput(input_slots['ao'], tex_node, 1)
+
                             else:
                                 mat_node.setInput(input_slots['ao'], tex_node)
                             
@@ -621,6 +626,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                             elif engine == 'VRay':
                                 twoside_mat_node.setInput(2, tex_node)
 
+                            elif engine == 'Renderman':
+                                mat_node.setInput(input_slots['transl_weight'], tex_node, 1)
+
                             else:
                                 mat_node.setInput(input_slots['transl_weight'], tex_node)
 
@@ -645,7 +653,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                             elif engine == 'Renderman':
                                 invert_node = mat_builder_node.createNode("pxrinvert::22")
                                 invert_node.setInput(0, tex_node)
-                                mat_node.setInput(input_slots['gloss'], invert_node)
+                                mat_node.setInput(input_slots['gloss'], invert_node, 1)
 
                             elif engine == 'Octane':
                                 tex_node.parm("invert").set("1")
@@ -662,6 +670,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 mat_node.parm("option_use_roughness").set("1")
 
                             mat_node.setInput(input_slots['rough'], tex_node)
+
+                            if engine == 'Renderman':
+                                mat_node.setInput(input_slots['rough'], tex_node, 1)
 
                         elif tex_type in opc_names:
                             opc_exists = True
@@ -697,17 +708,15 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                             normal_exists = True
                             if engine in ['Arnold', 'Redshift', 'Renderman']:
                                 normal_node = mat_builder_node.createNode(node_names['bump'])
-                                normal_node.setInput(1, tex_node)
+                                normal_node.setInput(0, tex_node)
                                 mat_node.setInput(input_slots['normal'], normal_node)
 
                                 if engine == 'Redshift':
                                     normal_node.parm("inputType").set("1")
+                                elif engine == 'Renderman':
+                                    normal_node.setInput(1, tex_node)
 
                             elif engine == 'Octane':
-                                mat_node.setInput(input_slots['normal'], tex_node)
-
-                            elif engine == 'Renderman':
-                                normal_node = mat_builder_node.createNode("pxrnormalmap:22")
                                 mat_node.setInput(input_slots['normal'], tex_node)
 
                             elif engine == 'VRay':
@@ -753,6 +762,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 if diffuse_exists == True:
                                     diffuse_node.setInput(0, tex_node)
 
+                            elif engine == 'Renderman':
+                                mat_node.setInput(input_slots['ao'], tex_node, 1)
+
                             else:
                                 mat_node.setInput(input_slots['ao'], tex_node)
 
@@ -783,7 +795,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                             elif engine == 'Renderman':
                                 invert_node = mat_builder_node.createNode("pxrinvert::22")
                                 invert_node.setInput(0, tex_node)
-                                mat_node.setInput(input_slots['gloss'], invert_node)
+                                mat_node.setInput(input_slots['gloss'], invert_node, 1)
 
                             elif engine == 'Octane':
                                 tex_node.parm("invert").set("1")
@@ -804,6 +816,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
 
                             mat_node.setInput(input_slots['rough'], tex_node)
 
+                            if engine == 'Renderman':
+                                mat_node.setInput(input_slots['rough'], tex_node, 1)
+
                         elif tex_type in opc_names and opc_exists == False:
                             opc_exists = True
 
@@ -819,6 +834,8 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                     mat_node.setInput(47, tex_node)
 
                             elif engine == 'Renderman':
+                                tex_node = mat_builder_node.createNode(node_names['texture_node'], tex_type)
+                                tex_node.parm(parm_names['tex_filename']).set(dirpath + tex)
                                 mat_node.setInput(input_slots['opc'], tex_node, 1)
 
                             else:
@@ -839,16 +856,16 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                             
                             if engine in ['Arnold', 'Redshift', 'Renderman']:
                                 normal_node = mat_builder_node.createNode(node_names['bump'])
-                                normal_node.setInput(1, tex_node)
+                                normal_node.setInput(0, tex_node)
                                 mat_node.setInput(input_slots['normal'], normal_node)
 
                                 if engine == 'Redshift':
                                     normal_node.parm("inputType").set("1")
+                                elif engine == 'Renderman':
+                                    normal_node.setInput(1, tex_node)
+                                    normal_node.setInput(0, None)
 
                             elif engine == 'Octane':
-                                mat_node.setInput(input_slots['normal'], tex_node)
-
-                            elif engine == 'Renderman':
                                 mat_node.setInput(input_slots['normal'], tex_node)
 
                             elif engine == 'VRay':
@@ -878,6 +895,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
 
                             elif engine == 'VRay':
                                 twoside_mat_node.setInput(2, tex_node)
+
+                            elif engine == 'Renderman':
+                                mat_node.setInput(input_slots['transl_weight'], tex_node, 1)
 
                             else:
                                 mat_node.setInput(input_slots['transl_weight'], tex_node)
@@ -944,7 +964,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 mat_node.setInput(input_slots['diffuse'], tex_node)
 
                             if is_leaf != None:
-                                if prim_group.lower() + "_subsurfacecolor.png" not in tex_list_lower:
+                                if "/" + prim_group.lower() + "_subsurfacecolor.png" not in tex_list_lower:
                                     transl_color_exists = True
 
                                     cc_node = mat_builder_node.createNode(node_names['cc'])
@@ -986,6 +1006,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 if diffuse_exists == True:
                                     diffuse_node.setInput(0, tex_node)
 
+                            elif engine == 'Renderman':
+                                mat_node.setInput(input_slots['ao'], tex_node, 1)
+
                             else:
                                 mat_node.setInput(input_slots['ao'], tex_node)
 
@@ -1020,6 +1043,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                             elif engine == 'VRay':
                                 twoside_mat_node.setInput(2, tex_node)
 
+                            elif engine == 'Renderman':
+                                mat_node.setInput(input_slots['transl_weight'], tex_node, 1)
+
                             else:
                                 mat_node.setInput(input_slots['transl_weight'], tex_node)
 
@@ -1043,7 +1069,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                             elif engine == 'Renderman':
                                 invert_node = mat_builder_node.createNode("pxrinvert::22")
                                 invert_node.setInput(0, tex_node)
-                                mat_node.setInput(input_slots['gloss'], invert_node)
+                                mat_node.setInput(input_slots['gloss'], invert_node, 1)
 
                             elif engine == 'Octane':
                                 tex_node.parm("invert").set("1")
@@ -1060,6 +1086,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 mat_node.parm("option_use_roughness").set("1")
 
                             mat_node.setInput(input_slots['rough'], tex_node)
+
+                            if engine == 'Renderman':
+                                mat_node.setInput(input_slots['rough'], tex_node, 1)
 
                         elif tex_type in opc_names:
                             opc_exists = True
@@ -1100,13 +1129,16 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                             normal_exists = True
                             if engine in ['Arnold', 'Redshift', 'Renderman']:
                                 normal_node = mat_builder_node.createNode(node_names['bump'])
-                                normal_node.setInput(1, tex_node)
+                                normal_node.setInput(0, tex_node)
                                 mat_node.setInput(input_slots['normal'], normal_node)
 
                                 if engine == 'Redshift':
                                     normal_node.parm("inputType").set("1")
                                 elif engine == 'Arnold':
                                     normal_node.parm("color_to_signed").set("0")
+                                elif engine == 'Renderman':
+                                    normal_node.setInput(1, tex_node)
+                                    normal_node.setInput(0, None)
 
                             elif engine == 'Octane':
                                 mat_node.setInput(input_slots['normal'], tex_node)
@@ -1180,6 +1212,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 elif engine == 'Octane':
                                     if diffuse_exists == True:
                                         diffuse_node.setInput(0, tex_node)
+                                
+                                elif engine == 'Renderman':
+                                    mat_node.setInput(input_slots['ao'], tex_node, 1)
 
                                 else:
                                     mat_node.setInput(input_slots['ao'], tex_node)
@@ -1211,7 +1246,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 elif engine == 'Renderman':
                                     invert_node = mat_builder_node.createNode("pxrinvert::22")
                                     invert_node.setInput(0, tex_node)
-                                    mat_node.setInput(input_slots['gloss'], invert_node)
+                                    mat_node.setInput(input_slots['gloss'], invert_node, 1)
 
                                 elif engine == 'Octane':
                                     tex_node.parm("invert").set("1")
@@ -1231,6 +1266,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                     mat_node.parm("option_use_roughness").set("1")
 
                                 mat_node.setInput(input_slots['rough'], tex_node)
+
+                                if engine == 'Renderman':
+                                    mat_node.setInput(input_slots['rough'], tex_node, 1)
 
                             elif tex_type in opc_names:
                                 opc_exists = True
@@ -1276,19 +1314,18 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 normal_exists = True
                                 if engine in ['Arnold', 'Redshift', 'Renderman']:
                                     normal_node = mat_builder_node.createNode(node_names['bump'])
-                                    normal_node.setInput(1, tex_node)
+                                    normal_node.setInput(0, tex_node)
                                     mat_node.setInput(input_slots['normal'], normal_node)
 
                                     if engine == 'Redshift':
                                         normal_node.parm("inputType").set("1")
-
                                     elif engine == 'Arnold':
                                         normal_node.parm("color_to_signed").set("0")
+                                    elif engine == 'Renderman':
+                                        normal_node.setInput(1, tex_node)
+                                        normal_node.setInput(0, None)
 
                                 elif engine == 'Octane':
-                                    mat_node.setInput(input_slots['normal'], tex_node)
-
-                                elif engine == 'Renderman':
                                     mat_node.setInput(input_slots['normal'], tex_node)
 
                                 elif engine == 'VRay':
@@ -1320,6 +1357,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
 
                                 elif engine == 'VRay':
                                     twoside_mat_node.setInput(2, tex_node)
+
+                                elif engine == 'Renderman':
+                                    mat_node.setInput(input_slots['transl_weight'], tex_node, 1)
 
                                 else:
                                     mat_node.setInput(input_slots['transl_weight'], tex_node)
