@@ -859,6 +859,7 @@ class TextureImporter(QWidget):
 
                     if self.ui.auto_triplanar.isChecked() == True:
                         triplanar_node = mat_builder_node.createNode("arnold::uv_projection")
+                        triplanar_node.parm("projection_type").set("4")
                         triplanar_node.setInput(0, tex_node)
                         triplanar_node.setInput(5, matrix)
 
