@@ -18,7 +18,6 @@ Tool | Functionality
 Asset Checker | Manages missing files in your project & more!
 Material Importer | Quickly imports textures and builds whole shading networks.
 SpeedTree Importer | One-Click solution to import SpeedTree assets.
-fSpy Importer | Imports JSON files from [fSpy](https://github.com/stuffmatic/fSpy) **(EXPERIMENTAL)**
 RS Samples Editor | A GUI to set up individual samples quicker **(EXPERIMENTAL)**
 Intel + Nvidia Denoiser | An HDA to process renders with Intel or Nvidia denoiser in PDG.
 ACES Batch Converter | An HDA to batch convert images and textures to ACES in PDG.
