@@ -223,9 +223,9 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                 'spec': 5,
                 'rough': 7,
                 'gloss': 7,
-                'opc': 47,
-                'normal': 49,
-                'bump': 49,
+                'opc': 50,
+                'normal': 52,
+                'bump': 52,
             }
             node_names = {
                 'mat_builder': 'redshift_vopnet',
@@ -241,7 +241,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                 'transl_weight': 'transl_weight',
                 'roughness': 'refl_roughness',
                 'tex_filename': 'tex0',
-                'gamma': ['tex0_gammaoverride', '1']
+                'gamma': ['tex0_colorSpace', 'Raw']
             }
 
         elif engine == 'Renderman':
@@ -687,7 +687,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 else:
                                     tex_node = mat_builder_node.createNode(node_names['texture_node'], tex_type)
                                     tex_node.parm(parm_names['tex_filename']).set(dirpath + tex)
-                                    mat_node.setInput(47, tex_node)
+                                    mat_node.setInput(input_slots['opc'], tex_node)
 
                             elif engine == 'Renderman':
                                 mat_node.setInput(input_slots['opc'], tex_node, 1)
@@ -831,7 +831,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 else:
                                     tex_node = mat_builder_node.createNode(node_names['texture_node'], tex_type)
                                     tex_node.parm(parm_names['tex_filename']).set(dirpath + tex)
-                                    mat_node.setInput(47, tex_node)
+                                    mat_node.setInput(input_slots['opc'], tex_node)
 
                             elif engine == 'Renderman':
                                 tex_node = mat_builder_node.createNode(node_names['texture_node'], tex_type)
@@ -1103,7 +1103,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                 else:
                                     tex_node = mat_builder_node.createNode(node_names['texture_node'], tex_type)
                                     tex_node.parm(parm_names['tex_filename']).set(dirpath + tex)
-                                    mat_node.setInput(47, tex_node)
+                                    mat_node.setInput(input_slots['opc'], tex_node)
 
                             elif engine == 'Renderman':
                                 mat_node.setInput(input_slots['opc'], tex_node, 1)
@@ -1283,7 +1283,7 @@ class SpeedTreeImporter(QtWidgets.QWidget):
                                     else:
                                         tex_node = mat_builder_node.createNode(node_names['texture_node'], tex_type)
                                         tex_node.parm(parm_names['tex_filename']).set(dirpath + tex)
-                                        mat_node.setInput(47, tex_node)
+                                        mat_node.setInput(input_slots['opc'], tex_node)
 
                                 elif engine == 'Renderman':
                                     tex_node = mat_builder_node.createNode(node_names['texture_node'], tex_type)
