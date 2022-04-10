@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuDocument>
+  <menu>
+    <separatorItem />
+    <scriptItem id="dmnk_pivot_transform">
+      <label>DMNK Pivot Transform</label>
+      <context>
+        <expression>
+            import dmnkmenutools.utils as mu
+            return mu.is_obj_node(kwargs) || mu.is_sop_transform(kwargs)
+        </expression>
+      </context>
+      <scriptCode><![CDATA[
+#import importlib
+import dmnkmenutools.utils as mu
+#importlib.reload(mu)
+mu.add_pivot_transform(kwargs)
+    ]]></scriptCode>
+    </scriptItem>
+  </menu>
+</menuDocument>
