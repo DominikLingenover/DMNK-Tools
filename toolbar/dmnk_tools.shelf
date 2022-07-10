@@ -6,12 +6,6 @@
  a single file. -->
 
   <toolshelf name="dmnk_main_shelf" label="DMNK Shelf">
-    <memberTool name="Copy To External"/>
+    <memberTool name="dmnk_create_instance"/>
   </toolshelf>
-  <tool name="Copy To External" label="Copy To Ext" icon="PLASMA_App">
-    <helpText><![CDATA["""Copies the currently selected object to the clipboard to be used with OD Copy/Paste External.\nYou can read more about it here:  https://github.com/heimlich1024/OD_CopyPasteExternal"""]]></helpText>
-    <script scriptType="python"><![CDATA[from OD import shelftools
-
-shelftools.copyToExternal()]]></script>
-  </tool>
 </shelfDocument>
