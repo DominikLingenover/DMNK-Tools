@@ -6,6 +6,21 @@
  a single file. -->
 
   <toolshelf name="dmnk_main_shelf" label="DMNK Shelf">
-    <memberTool name="dmnk_create_instance"/>
+    <memberTool name="dmnk_instance_from_node"/>
+    <memberTool name="dmnk_proxy_from_node"/>
   </toolshelf>
+
+  <tool name="dmnk_proxy_from_node" label="RS Proxy from Node" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import dmnkshelfutils as dsu
+#import importlib
+#importlib.reload(dsu)
+dsu.proxy_from_node()]]></script>
+  </tool>
+
+  <tool name="dmnk_instance_from_node" label="Instance from Node" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import dmnkshelfutils as dsu
+#import importlib
+#importlib.reload(dsu)
+dsu.instance_from_node()]]></script>
+  </tool>
 </shelfDocument>
